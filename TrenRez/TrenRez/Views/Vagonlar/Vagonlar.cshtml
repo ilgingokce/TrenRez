@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Vagonlar";
+}
+
+<h2>Vagonlar</h2>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<input type="button" id="vagonListele" value=" Vagonları Listele" />
+
+
+
+<div id="vagonlar"></div>
+<div id="kSayisi">Rezervasyon Yapilacak Kisi Sayisi <input type="text" id="kisiSayisi" /></div>
+<div id="fVagon">Kisiler Farkli Vagonlara Yerlestirilebilir <input type="text" id="farkli" /></div>
+<div id="rButton"><input type="button" id="rezButton" value=" Rezervasyon Yap" /></div>
+
+<script>
+
+    $(document).ready(function () {
+        $("#vagonListele").click(function () {
+            $.getJSON('../api/vagon').done(function (veri) {
+                var vagonlar = "";
+                $.each(veri, function (key, vagon) {
+                    vagonlar += "Ad : " + vagon.Ad + "   Kapasite :" + vagon.Kapasite + "   DoluKoltukAdet :" + vagon.DoluKoltukAdet + "<br/>";
+                });
+                $('#vagonlar').html(vagonlar);
+            })
+        })
+    })
+
+</script>
